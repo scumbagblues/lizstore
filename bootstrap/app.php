@@ -17,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         //
+    })//Middleware for Vercel
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -27,8 +27,6 @@ export default function CreateCategory({ className = '' }) {
             </header>
              <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         name="name"
