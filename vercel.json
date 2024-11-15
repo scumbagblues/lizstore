@@ -3,14 +3,12 @@
     "regions": [
         "fra1"
     ],
-    "build": {
-        "env": {
-            "APP_ENV": "production"
-        },
-        "commands": {
-            "predeploy": "mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache"
+    "builds": [
+        {
+            "src": "index.php",
+            "use": "@vercel/php"
         }
-    },
+    ],
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.7.1"

@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "vercel-build": "mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && npm run build"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
