@@ -8,10 +8,13 @@
         "src": "/(.*)",
         "dest": "/api/index.php"
     }],
+    "rewrites": [
+    { "source": "/(.*)", "destination": "https://lizstore.vercel.app/$1" }
+    ], 
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://https://lizstore.vercel.app/",
+        "APP_URL": "https://lizstore.vercel.app/",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
