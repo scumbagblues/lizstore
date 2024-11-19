@@ -8,12 +8,6 @@
         "src": "/(.*)",
         "dest": "/api/index.php"
     }],
-    "headers": [{
-      "source": "/build/assets/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
-      ]
-    }],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
