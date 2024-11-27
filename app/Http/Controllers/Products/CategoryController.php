@@ -36,26 +36,29 @@ class CategoryController extends Controller
         return Inertia::render('Categories/Show', ['category' => $category]);
     }
 
-    public function edit(Category $category)
-    {
-        return Inertia::render('Categories/Edit', ['category' => $category]);
+    public function edit($id)
+    {   
+        $category = Category::findOrFail($id);
+        return Inertia::render('Products/Categories/Edit', ['category' => $category]);
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
+        $category = Category::findOrFail($id);
         $category->update($request->all());
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories');
     }
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('categories.index');
-    }
+        return redirect()->route('categories');
+    }    
 }
