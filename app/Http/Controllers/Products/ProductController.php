@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Products\Category;
+use App\Models\Products\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+
 
 class ProductController extends Controller
 {
@@ -12,15 +16,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return Inertia::render('Products/Index', ['products' => $products]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
+    {   
+        $categories = Category::all();
+        return Inertia::render('Products/Create', ['categories' => $categories]);
     }
 
     /**
@@ -28,7 +34,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+        ]);
+
+        Product::create($request->all());
+
+        return redirect()->route('products');
     }
 
     /**

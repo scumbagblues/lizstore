@@ -2,7 +2,7 @@
 
 namespace App\Models\Products;
 
-use App\Models\Models\Products\Product;
+use App\Models\Products\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

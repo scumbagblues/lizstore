@@ -10,7 +10,7 @@ import { Head } from '@inertiajs/react';
 const Index = ({ categories }) => {
     const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] = useState(false);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
-   
+
     const {
         data,
         setData,
