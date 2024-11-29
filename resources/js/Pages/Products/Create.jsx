@@ -12,11 +12,42 @@ const Create = ({categories, auth, errors}) => {
         price: '',
         stock: '',
         category_id: '',
+        image1: null,
+        image2: null,
+        image3: null,
+        image4: null,
+        image5: null,
     });
+
+    const [previewImages, setPreviewImages] = useState({
+        image1: null,
+        image2: null,
+        image3: null,
+        image4: null,
+        image5: null,
+    });
+
+    const handleImageChange = (e, imageKey) => {
+        const file = e.target.files[0];
+        setData(imageKey, file);
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImages((prev) => ({
+                    ...prev,
+                    [imageKey]: reader.result,
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('products.store'));
+        post(route('products.store'), {
+            forceFormData: true,
+        });
     };
     
     return (
@@ -98,6 +129,20 @@ const Create = ({categories, auth, errors}) => {
                                     </select>
                                     {errors.category_id && <div className="mt-2 text-sm text-red-600">{errors.category_id}</div>}
                                 </div>
+                                {[1, 2, 3, 4, 5].map((i) => (
+                                    <div key={i} className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Image {i}</label>
+                                        {previewImages[`image${i}`] && (
+                                            <img src={previewImages[`image${i}`]} alt={`Preview ${i}`} className="mb-2 h-20 w-20 object-cover" />
+                                        )}
+                                        <input
+                                            type="file"
+                                            onChange={(e) => handleImageChange(e, `image${i}`)}
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
+                                        />
+                                        {errors[`image${i}`] && <div className="mt-2 text-sm text-red-600">{errors[`image${i}`]}</div>}
+                                    </div>
+                                ))}
                                 <PrimaryButton type="submit" disabled={processing}>
                                     Create Product
                                 </PrimaryButton>

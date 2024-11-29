@@ -7,10 +7,13 @@ use App\Models\Products\Category;
 use App\Models\Products\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
 {
+    
+    protected $images = ['image1', 'image2', 'image3', 'image4', 'image5'];
     /**
      * Display a listing of the resource.
      */
@@ -39,9 +42,26 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'category_id' => 'required|exists:categories,id',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Product::create($request->all());
+        $data = $request->all();
+
+        foreach ($this->images as $i => $image) {
+            if ($request->hasFile($image)) {
+                $productName = $this->generateImageName($data['name']);
+                $file = $request->file($image);
+                $filename = "{$productName}." . $file->getClientOriginalExtension();
+                $path = $file->storeAs('products', $filename, 'public');
+                $data[$image] = $path;
+            }
+        }
+        Product::create($data);
 
         return redirect()->route('products');
     }
@@ -70,18 +90,39 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
+           
         ]);
 
         $product = Product::findOrFail($id);
-        $product->update($request->all());
+        $data = $request->all();
+
+        foreach ($this->images as $i => $image) {
+            if ($request->hasFile($image)) {
+                $productName = $this->generateImageName($data['name']);
+                // Eliminar la imagen anterior si existe
+                if ($product->{$image}) {
+                    Storage::disk('public')->delete($product->{$image});
+                }
+                $file = $request->file($image);
+                $filename = "{$productName}." . $file->getClientOriginalExtension();
+                $path = $file->storeAs('products', $filename, 'public');
+                $data[$image] = $path;
+            } else {
+                $data[$image] = $product->{$image};
+            }
+        }
+       
+
+        $product->update($data);
 
         return redirect()->route('products');
     }
@@ -92,8 +133,20 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+
+        foreach ($this->images as $i => $image) {
+            if ($product->{"image$i"}) {
+                Storage::disk('public')->delete($product->{"image$i"});
+            }
+        }
         $product->delete();
 
         return redirect()->route('products');
+    }
+
+    protected function generateImageName(string $name)
+    {   
+        $name = $name . '_' . str()->random(5);
+        return str_replace(' ', '_', $name);
     }
 }
