@@ -147,6 +147,18 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                                    href={route('categories')}
+                                    active={route().current('categories')}
+                                >
+                                    Categories
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('products')}
+                                    active={route().current('products')}
+                                >
+                                    Products
+                                </ResponsiveNavLink>
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
@@ -170,6 +182,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             >
                                 Log Out
                             </ResponsiveNavLink>
+                            
                         </div>
                     </div>
                 </div>
