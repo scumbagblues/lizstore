@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -8,13 +9,33 @@ import { Head, useForm } from '@inertiajs/react';
 
 
 const Edit = ({category}) => {
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: category.name,
+        path_category_img: null,
     });
+
+    const [previewImage, setPreviewImage] = useState(
+        category.path_category_img ? `/storage/${category.path_category_img}` : null
+    );
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setData('path_category_img', file);
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route('categories.update', category.id));
+        post(route('categories.update', category.id), {
+            forceFormData: true,
+        });
     };
 
     return (
@@ -31,7 +52,7 @@ const Edit = ({category}) => {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">    
                             <form onSubmit={handleSubmit}>
-                                <div>
+                                <div className="mb-4">
                                     <InputLabel htmlFor="name" value="Name" />
                                     <TextInput
                                         id="name"
@@ -43,6 +64,18 @@ const Edit = ({category}) => {
                                         autoComplete="name"
                                     />
                                     <InputError className="mt-2" message={errors.name} />
+                                </div>
+                                <div className="mb-4">
+                                    <InputLabel htmlFor="name" value="Category Image" />
+                                    {previewImage && (
+                                        <img src={previewImage} alt="Preview" className="mb-2 h-20 w-20 object-cover" />
+                                    )}
+                                    <input
+                                        type="file"
+                                        onChange={handleImageChange}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
+                                    />
+                                    <InputError className="mt-2" message={errors.path_category_img} />
                                 </div>
                                 <div className="flex mt-4 items-center gap-4">
                                     <PrimaryButton disabled={processing}>
