@@ -37,7 +37,7 @@ export default function Product({ company, product }) {
                                             <div className="carousel w-72 h-72">
                                                 {images.map((image, index) => (
                                                     <div key={index} id={`item${index + 1}`} className="carousel-item w-100">
-                                                        <img src={`/${image}`} className="w-100" alt={`Product Image ${index + 1}`} />
+                                                        <img src={`/storage/${image}`} className="w-100" alt={`Product Image ${index + 1}`} />
                                                     </div>
                                                 ))}    
                                             </div>
