@@ -3,14 +3,18 @@
 use App\Http\Controllers\Products\CategoryController;
 use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StoreFront\StoreProductController;
+use App\Models\Products\Category;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
 Route::get('/', function () {
+    $categories = Category::all();
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
+        'categories' => $categories,
         //'canRegister' => Route::has('register'),
         'company' => 'Supercharged Inc.',
     ]);
@@ -37,6 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+});
+
+//StoreFront Routes
+Route::namespace('App\Http\Controllers\StoreFront')->group(function () {
+    Route::get('/products/category/{id}', [StoreProductController::class, 'index'])->name('storefront.products');
+    Route::get('/product/detail/{id}', [StoreProductController::class, 'show'])->name('storefront.product.show');
 });
 
 
