@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -26,6 +26,12 @@ const Create = ({categories, auth, errors}) => {
         image4: null,
         image5: null,
     });
+
+    const nameInputRef = useRef(null);
+
+    useEffect(() => {
+        nameInputRef.current.focus();
+    }, []);
 
     const handleImageChange = (e, imageKey) => {
         const file = e.target.files[0];
@@ -67,6 +73,7 @@ const Create = ({categories, auth, errors}) => {
                                         value={data.name}
                                         className="mt-1 block w-full"
                                         autoComplete="name"
+                                        ref={nameInputRef}
                                         isFocused={true}
                                         onChange={(e) => setData('name', e.target.value)}
                                         required

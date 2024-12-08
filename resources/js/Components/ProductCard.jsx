@@ -6,7 +6,7 @@ const ProductCard = ({ product, message, imgPath, link, buyNow }) => {
         return null;
     }
  
-    const absImgPath = `/storage/${imgPath}`;
+    const absImgPath = imgPath ? `/storage/${imgPath}` : '/images/noproduct.jpg';
  
     return (
         <div className="card bg-base-100 w-70 h-70 shadow-xl">

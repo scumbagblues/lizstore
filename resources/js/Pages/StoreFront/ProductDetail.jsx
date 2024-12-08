@@ -11,6 +11,9 @@ export default function Product({ company, product }) {
         product.image5,
     ].filter(Boolean); // Filtrar imágenes no nulas
 
+    const defaultImage = '/images/noproduct.jpg';
+    const displayImages = images.length > 0 ? images : [defaultImage];
+
     return (
         <>
             <Head title="Detalle de Producto" />
@@ -35,18 +38,18 @@ export default function Product({ company, product }) {
                                     <div className="hero-content text-center">
                                         <div className="max-w-4xl">
                                             <div className="carousel w-72 h-72">
-                                                {images.map((image, index) => (
-                                                    <div key={index} id={`item${index + 1}`} className="carousel-item w-100">
-                                                        <img src={`/storage/${image}`} className="w-100" alt={`Product Image ${index + 1}`} />
+                                                {displayImages.map((image, index) => (
+                                                    <div key={index} id={`item${index + 1}`} className="carousel-item w-72">
+                                                        <img src={image} className="w-72" alt={`Product Image ${index + 1}`} />
                                                     </div>
-                                                ))}    
+                                                ))} 
                                             </div>
                                             <div className="flex w-full justify-center gap-2 py-2">
-                                            {images.map((_, index) => (
-                                                <a key={index} href={`#item${index + 1}`} className="btn btn-xs">
-                                                    {index + 1}
-                                                </a>
-                                            ))}
+                                                {displayImages.map((_, index) => (
+                                                    <a key={index} href={`#item${index + 1}`} className="btn btn-xs">
+                                                        {index + 1}
+                                                    </a>
+                                                ))}
                                             </div>
                                             <p className="py-6 text-xl md:text-2xl">
                                                 <strong>${product.price}</strong>
