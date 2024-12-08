@@ -13,6 +13,10 @@ export default function Product({ company, product }) {
 
     const defaultImage = '/images/noproduct.jpg';
     const displayImages = images.length > 0 ? images : [defaultImage];
+   // Crear la URL del producto
+   const celNumber = '523310669367';
+   const productUrl = `${window.location.origin}/product/detail/${product.id}`;
+   const urlencodedtext = encodeURIComponent(`Estoy interesado en este producto: ${product.name}. Puedes verlo aquí: ${productUrl}`);
 
     return (
         <>
@@ -57,9 +61,18 @@ export default function Product({ company, product }) {
                                             <p className="py-6 text-xl md:text-2xl">
                                                 {product.description}
                                             </p>
-                                            <button className="btn btn-secondary">
-                                                Comprar
-                                            </button>
+                                            <a
+                                                aria-label="Chat on WhatsApp"
+                                                href={`https://wa.me/${celNumber}?text=${urlencodedtext}`}
+                                                className="btn btn-secondary flex items-center justify-center"
+                                            >
+                                                <img
+                                                    alt="Chat on WhatsApp"
+                                                    src="/images/whatsapp.png"
+                                                    className="w-6 h-6 mr-2"
+                                                />
+                                                Comprar x WhatsApp
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
