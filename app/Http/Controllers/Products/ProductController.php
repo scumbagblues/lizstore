@@ -48,9 +48,11 @@ class ProductController extends Controller
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'published' => 'nullable|boolean',
         ]);
 
         $data = $request->all();
+        $data['published'] = $request->has('published') ? $request->published : false;
 
         foreach ($this->images as $i => $image) {
             if ($request->hasFile($image)) {
@@ -99,11 +101,18 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'published' => 'nullable|boolean',
            
         ]);
 
         $product = Product::findOrFail($id);
         $data = $request->all();
+        $data['published'] = $request->has('published') ? $request->published : false;
 
         foreach ($this->images as $i => $image) {
             if ($request->hasFile($image)) {

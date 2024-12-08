@@ -4,6 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head } from '@inertiajs/react';
+import Checkbox from '@/Components/Checkbox';
 
 const Create = ({categories, auth, errors}) => {
     const { data, setData, post, processing } = useForm({
@@ -17,6 +18,7 @@ const Create = ({categories, auth, errors}) => {
         image3: null,
         image4: null,
         image5: null,
+        published: false,
     });
 
     const [previewImages, setPreviewImages] = useState({
@@ -150,6 +152,16 @@ const Create = ({categories, auth, errors}) => {
                                         {errors[`image${i}`] && <div className="mt-2 text-sm text-red-600">{errors[`image${i}`]}</div>}
                                     </div>
                                 ))}
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Publish</label>
+                                    <Checkbox
+                                        id="published"
+                                        name="published"
+                                        label="Published"
+                                        checked={data.published}
+                                        onChange={(e) => setData('published', e.target.checked)}
+                                    />
+                                </div>    
                                 <PrimaryButton type="submit" disabled={processing}>
                                     Create Product
                                 </PrimaryButton>

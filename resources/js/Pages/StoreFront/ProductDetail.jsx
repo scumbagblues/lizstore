@@ -1,8 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 
-
-export default function Product({ company, product }) {
-
+export default function ProductDetail({ company, product }) {
     const images = [
         product.image1,
         product.image2,
@@ -13,10 +11,11 @@ export default function Product({ company, product }) {
 
     const defaultImage = '/images/noproduct.jpg';
     const displayImages = images.length > 0 ? images : [defaultImage];
-   // Crear la URL del producto
-   const celNumber = '523310669367';
-   const productUrl = `${window.location.origin}/product/detail/${product.id}`;
-   const urlencodedtext = encodeURIComponent(`Estoy interesado en este producto: ${product.name}. Puedes verlo aquí: ${productUrl}`);
+
+    // Crear la URL del producto
+    const celNumber = '523310669367';
+    const productUrl = `${window.location.origin}/product/detail/${product.id}`;
+    const urlencodedtext = encodeURIComponent(`Estoy interesado en este producto: ${product.name}. Puedes verlo aquí: ${productUrl}`);
 
     return (
         <>
@@ -26,20 +25,21 @@ export default function Product({ company, product }) {
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                             <div className="flex lg:col-start-2 lg:justify-center">
-                                <Link href='/'>
-                                <img
-                                    id="logo"
-                                    width="165"
-                                    height="35"
-                                    className="rounded-xl"
-                                    src="/images/GarageSale.png"
-                                />
+                                <Link href="/">
+                                    <img
+                                        id="logo"
+                                        width="165"
+                                        height="35"
+                                        className="rounded-xl"
+                                        src="/images/GarageSale.png"
+                                        alt="Garage Sale"
+                                    />
                                 </Link>
                             </div>
                         </header>
 
                         <main className="mt-6">
-                            <section class="container mx-auto mt-12 mb-4">
+                            <section className="container mx-auto mt-12 mb-4">
                                 <div className="hero min-h-[30rem] bg-base-100 rounded-xl">
                                     <div className="hero-content text-center">
                                         <div className="max-w-4xl">
@@ -48,7 +48,7 @@ export default function Product({ company, product }) {
                                                     <div key={index} id={`item${index + 1}`} className="carousel-item w-72">
                                                         <img src={`/storage/${image}`} className="w-72" alt={`Product Image ${index + 1}`} />
                                                     </div>
-                                                ))} 
+                                                ))}
                                             </div>
                                             <div className="flex w-full justify-center gap-2 py-2">
                                                 {displayImages.map((_, index) => (
@@ -63,6 +63,7 @@ export default function Product({ company, product }) {
                                             <p className="py-6 text-xl md:text-2xl">
                                                 {product.description}
                                             </p>
+                                        
                                             <a
                                                 aria-label="Chat on WhatsApp"
                                                 href={`https://wa.me/${celNumber}?text=${urlencodedtext}`}
@@ -73,7 +74,7 @@ export default function Product({ company, product }) {
                                                     src="/images/whatsapp.png"
                                                     className="w-6 h-6 mr-2"
                                                 />
-                                                Comprar x WhatsApp
+                                                Comprar en WhatsApp
                                             </a>
                                         </div>
                                     </div>

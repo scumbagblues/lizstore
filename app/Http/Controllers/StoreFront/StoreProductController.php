@@ -15,7 +15,9 @@ class StoreProductController extends Controller
     public function index($id)
     {   
         $categoryId = $id;
-        $products = Product::where('category_id', $categoryId)->get();
+        $products = Product::where('category_id', $categoryId)
+                            ->where('published', true)
+                            ->get();
         
         return Inertia::render('StoreFront/Product', ['products' => $products]);
     }

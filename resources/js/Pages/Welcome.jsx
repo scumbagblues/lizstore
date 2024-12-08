@@ -8,19 +8,18 @@ export default function Welcome({ auth, company,categories }) {
         <>
             <Head title="Garage Sales" />
             <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-               
                 <div className="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                             <div className="flex lg:col-start-2 lg:justify-center">
-                                <Link href='/'>
-                                <img
-                                    id="logo"
-                                    width="165"
-                                    height="35"
-                                    className="rounded-xl"
-                                    src="/images/GarageSale.png"
-                                />
+                                <Link href="/">
+                                    <img
+                                        id="logo"
+                                        width="165"
+                                        height="35"
+                                        className="rounded-xl"
+                                        src="/images/GarageSale.png"
+                                    />
                                 </Link>
                             </div>
                             <nav className="-mx-3 flex flex-1 justify-end">
@@ -38,12 +37,46 @@ export default function Welcome({ auth, company,categories }) {
                         </header>
 
                         <main className="mt-6">
+                            <div className="flex justify-center mt-8 mb-7">
+                                <button
+                                    className="btn btn-warning"
+                                    onClick={() =>
+                                        document
+                                            .getElementById("disclaimer")
+                                            .showModal()
+                                    }
+                                >
+                                    Instrucciones de venta
+                                </button>
+                                <dialog
+                                    id="disclaimer"
+                                    className="modal modal-bottom sm:modal-middle"
+                                >
+                                    <div className="modal-box">
+                                        <h3 className="font-bold text-lg">
+                                            Hola!
+                                        </h3>
+                                        <p className="py-4">
+                                            La forma de venta es através de WhatsApp. 
+                                        </p>
+                                        <div className="modal-action">
+                                            <form method="dialog">
+                                                {/* if there is a button in form, it will close the modal */}
+                                                <button className="btn btn-secondary">
+                                                    Close
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </dialog>
+                            </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {categories.map((category) => (
                                     <ProductCard
-                                    Card key={category.id} 
-                                        product={category} 
-                                        message={'Ir a los productos'}
+                                        Card
+                                        key={category.id}
+                                        product={category}
+                                        message={"Ir a los productos"}
                                         imgPath={category.path_category_img}
                                         link={`/products/category/${category.id}`}
                                     />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
+import Checkbox from '@/Components/Checkbox';
 import { Head } from '@inertiajs/react';
 
 const Edit = ({ product, categories }) => {
@@ -16,6 +17,7 @@ const Edit = ({ product, categories }) => {
         image3: null,
         image4: null,
         image5: null,
+        published: product.published,
     });
 
     const [previewImages, setPreviewImages] = useState({
@@ -131,6 +133,16 @@ const Edit = ({ product, categories }) => {
                                         {errors[`image${i}`] && <div className="mt-2 text-sm text-red-600">{errors[`image${i}`]}</div>}
                                     </div>
                                 ))}
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Publish</label>
+                                    <Checkbox
+                                        id="published"
+                                        name="published"
+                                        label="Published"
+                                        checked={data.published}
+                                        onChange={(e) => setData('published', e.target.checked)}
+                                    />
+                                </div>    
                                 <PrimaryButton type="submit" disabled={processing}>
                                     Update Product
                                 </PrimaryButton>
