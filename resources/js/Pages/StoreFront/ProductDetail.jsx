@@ -26,6 +26,7 @@ export default function Product({ company, product }) {
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                             <div className="flex lg:col-start-2 lg:justify-center">
+                                <Link href='/'>
                                 <img
                                     id="logo"
                                     width="165"
@@ -33,6 +34,7 @@ export default function Product({ company, product }) {
                                     className="rounded-xl"
                                     src="/images/GarageSale.png"
                                 />
+                                </Link>
                             </div>
                         </header>
 
