@@ -46,7 +46,7 @@ export default function Welcome({ auth, company,categories }) {
                                             .showModal()
                                     }
                                 >
-                                    Instrucciones de venta
+                                    Dinámica de compra
                                 </button>
                                 <dialog
                                     id="disclaimer"
@@ -57,7 +57,69 @@ export default function Welcome({ auth, company,categories }) {
                                             Hola!
                                         </h3>
                                         <p className="py-4">
-                                            La forma de venta es através de WhatsApp. 
+                                            Bienvenid@ a GargeSale; todos los
+                                            productos que encontrarás aquí están
+                                            en excelentes condiciones, si alguno
+                                            tiene un detalle, estará descrito en
+                                            la información del producto. Todos
+                                            los artículos tienen al menos un 50%
+                                            de descuento de su precio como
+                                            nuevo; por lo que la dinámica de
+                                            compra será la siguiente:
+                                        </p>
+                                        <ol className="list-decimal list-inside py-4">
+                                            <li>
+                                                Cada producto tiene un botón de
+                                                "Comprar en WhatsApp", al hacer
+                                                click en él, me llegará un
+                                                mensaje via WhatsApp diciéndome
+                                                que estás interesad@ en el
+                                                producto. Piensa que estás
+                                                agregando artículos a tu carrito
+                                                de compras.
+                                            </li>
+                                            <li>
+                                                Una vez que tengas todos los
+                                                artículos que deseas en nuestro
+                                                chat de WhatsApp, te daré el
+                                                costo total y acordaremos la
+                                                forma de entrega de los
+                                                productos.
+                                            </li>
+                                            <li>
+                                                El pago puede realizarse por
+                                                transferencia antes de la
+                                                entrega o en efectivo al momento
+                                                de la entrega.
+                                                <ul className="list-disc list-inside ml-4">
+                                                    <li>
+                                                        Para compras menores a
+                                                        $400, los productos se
+                                                        entregarán en Plaza
+                                                        Triventi.
+                                                    </li>
+                                                    <li>
+                                                        Para compras iguales o
+                                                        mayores a $400, podemos
+                                                        acordar la entrega en un
+                                                        punto medio dentro de la
+                                                        Zona de López Mateos Sur
+                                                        (Plaza Triventi, Mega,
+                                                        Costco, Walmart Palomar,
+                                                        La Platza, Galerías
+                                                        Santa Anita).
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                        <p className="py-4">
+                                            Listo! Puedes comenzar a disfrutar
+                                            de tus productos. <p><strong>NOTA:</strong> Si tienes
+                                            cualquier pregunta antes de hacer
+                                            una compra, puedes hacer click en el
+                                            botón de "Compra por Whatsapp" para
+                                            iniciar un chat conmigo. Gracias por
+                                            estar aquí!</p>
                                         </p>
                                         <div className="modal-action">
                                             <form method="dialog">
