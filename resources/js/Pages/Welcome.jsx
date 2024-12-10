@@ -57,7 +57,7 @@ export default function Welcome({ auth, company,categories }) {
                                             Hola!
                                         </h3>
                                         <p className="py-4">
-                                            Bienvenid@ a GargeSale; todos los
+                                            Bienvenid@ a GarageSale; todos los
                                             productos que encontrarás aquí están
                                             en excelentes condiciones, si alguno
                                             tiene un detalle, estará descrito en
