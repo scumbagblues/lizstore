@@ -13,7 +13,7 @@ export default function ProductDetail({ company, product }) {
     const displayImages = images.length > 0 ? images : [defaultImage];
 
     // Crear la URL del producto
-    const celNumber = '523310669367';
+    const celNumber = '523312975542';
     const productUrl = `${window.location.origin}/product/detail/${product.id}`;
     const urlencodedtext = encodeURIComponent(`Estoy interesado en este producto: ${product.name}. Puedes verlo aquí: ${productUrl}`);
 
